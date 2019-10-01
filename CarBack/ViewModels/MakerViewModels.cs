@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace CarBack.ViewModels
 {
-    public class CarVM
+    public class MakerSelectVM
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Image { get; set; }
     }
 }

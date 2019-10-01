@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarBack.Migrations
 {
     [DbContext(typeof(EFDbContext))]
-    [Migration("20190930151234_base")]
-    partial class @base
+    [Migration("20191001011530_add tables")]
+    partial class addtables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,48 @@ namespace CarBack.Migrations
                 .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("CarBack.DAL.Entities.DbCar", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Image")
+                        .HasMaxLength(255);
+
+                    b.Property<int>("MakerId");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MakerId");
+
+                    b.ToTable("tblCars");
+                });
+
+            modelBuilder.Entity("CarBack.DAL.Entities.DbMaker", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Image")
+                        .HasMaxLength(255);
+
+                    b.Property<bool>("IsShow");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tblMakers");
+                });
 
             modelBuilder.Entity("CarBack.DAL.Entities.DbRole", b =>
                 {
@@ -179,6 +221,14 @@ namespace CarBack.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("CarBack.DAL.Entities.DbCar", b =>
+                {
+                    b.HasOne("CarBack.DAL.Entities.DbMaker", "Maker")
+                        .WithMany("Cars")
+                        .HasForeignKey("MakerId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("CarBack.DAL.Entities.DbUserRole", b =>

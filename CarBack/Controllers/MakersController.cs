@@ -11,24 +11,25 @@ namespace CarBack.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
-    public class CarsController : ControllerBase
+    public class MakersController : ControllerBase
     {
         private readonly EFDbContext _context;
 
-        public CarsController(EFDbContext context)
+        public MakersController(EFDbContext context)
         {
             _context = context;
         }
 
-        [HttpGet]
-        public IActionResult CarList()
+        [HttpGet("select")]
+        public IActionResult MakerSelectList()
         {
-            var model = _context.Cars.Select(c => new CarVM
-            {
-                Id = c.Id,
-                Name = c.Name,
-                Image = c.Image
-            }).ToList();
+            var model = _context.Makers
+                .Where(m => m.IsShow)
+                .Select(m => new MakerSelectVM
+                {
+                    Id = m.Id,
+                    Name = m.Name
+                }).ToList();
 
             return Ok(model);
         }

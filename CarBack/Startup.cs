@@ -49,6 +49,8 @@ namespace CarBack
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            SeederDB.SeedData(app.ApplicationServices, env, this.Configuration);
         }
     }
 }

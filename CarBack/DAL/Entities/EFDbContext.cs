@@ -17,6 +17,9 @@ namespace CarBack.DAL.Entities
         {
 
         }
+        public virtual DbSet<DbCar> Cars { get; set; }
+        public virtual DbSet<DbMaker> Makers { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
