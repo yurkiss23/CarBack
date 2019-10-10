@@ -32,5 +32,19 @@ namespace CarBack.Controllers
 
             return Ok(model);
         }
+
+        [HttpPost("create")]
+        public IActionResult Create([FromBody]CarAddVM model)
+        {
+            DbCar car = new DbCar
+            {
+                MakerId = model.MakerId,
+                Name = "NoName",
+                Image = ""
+            };
+            _context.Cars.Add(car);
+            _context.SaveChanges();
+            return Ok(car);
+        }
     }
 }

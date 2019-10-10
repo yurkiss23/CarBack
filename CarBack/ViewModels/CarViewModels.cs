@@ -11,4 +11,11 @@ namespace CarBack.ViewModels
         public string Name { get; set; }
         public string Image { get; set; }
     }
+
+    public class CarAddVM
+    {
+        public string Name { get; set; }
+        public int MakerId { get; set; }
+        public string Image { get; set; }
+    }
 }
