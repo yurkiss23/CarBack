@@ -34,7 +34,7 @@ namespace CarBack.Controllers
         }
 
         [HttpPost("create")]
-        public IActionResult Create([FromBody]CarAddVM model)
+        public IActionResult Create(CarCreateVM model)
         {
             DbCar car = new DbCar
             {
